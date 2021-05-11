@@ -4,6 +4,7 @@ const moment = require('moment');
 const axios = require("axios");
 const express = require('express');
 const canal = "julialabs"
+var last_total_contributors;
 
 const app = express();
 const sse = require('easy-server-sent-events');
@@ -42,10 +43,14 @@ const getMessages = async() => {
         progress
     }] = data;
 
+   last_total_contributors = total_contributors;
+
     return [
         `${total_contributors} pessoas já apoiaram EletroBlocks no CATARSE e faltam  ${tempoQueFalta} dias para a campanha finalizar.`,
         `${progress} d`
     ];
+
+    
 };
 
 twitch.on('message', async(channel, tags, message, self) => {
@@ -77,5 +82,9 @@ app.use('/static', express.static('public'));
   });
 
 setInterval(() => {
-  sendSSEMessage(send);
-}, 5000);
+  if (last_total_contributors != getMessages(total_contributors)){
+    sendSSEMessage(send);
+    last_total_contributors=total_contributors;
+  }
+
+}, 500);

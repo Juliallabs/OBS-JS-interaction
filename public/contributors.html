@@ -16,8 +16,7 @@
   </head>
   <body>
     <div id="app">
-      {{total_contributors}} pessoas já apoiaram EletroBlocks no CATARSE e
-      faltam {{tempoQueFalta}} dias para a campanha finalizar. {{progress}} d
+      {{total_contributors}}
     </div>
     <script>
       new Vue({
@@ -34,7 +33,7 @@
           this.getApi();
           setTimeout(() => {
             this.getApi();
-          }, 60000);
+          }, 6000);
         },
         methods: {
           getApi() {

@@ -15,18 +15,13 @@
     <title>ok</title>
   </head>
   <body>
-
-
     <div id="app">
       {{tempoQueFalta}}
     </div>
-
-    <img id="imagem" src="test.png" class="hide" alt="">
-
     <script>
       new Vue({
         el: "#app",
-        last_total_contributors: null,
+
         data() {
           return {
             total_contributors: null,
@@ -35,12 +30,10 @@
           };
         },
         mounted() {
-         do{
           this.getApi();
           setTimeout(() => {
             this.getApi();
-          }, 6000);
-        }while (true);
+          }, 60000);
         },
         methods: {
           getApi() {
@@ -59,27 +52,12 @@
                   },
                 ] = data;
                 this.total_contributors = total_contributors;
+                this.tempoQueFalta = tempoQueFalta;
                 this.progress = progress;
-                
-
-
-                //var last_total_contributors=total_contributors;
-
-
-               // if (last_total_contributors = total_contributors){
-                  var el;
-                  el = document.getElementById("imagem");
-                  el.style.visibility = 'visible';
-                  setTimeout(() => {
-                      el.style.visibility= 'hidden';
-                      console.log("total", total_contributors);
-                  }, 5000);
-                //}
-
-
-
-                
-                
+                // console.log(
+                //   `${total_contributors} pessoas já apoiaram EletroBlocks no CATARSE e faltam  ${tempoQueFalta} dias para a campanha finalizar.`,
+                //   `${progress} d`
+                // );
               });
           },
         },

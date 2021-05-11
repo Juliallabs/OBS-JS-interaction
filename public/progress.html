@@ -12,22 +12,13 @@
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
       crossorigin="anonymous"
     ></script>
-    <script src="/sse.js"></script>
     <title>ok</title>
   </head>
   <body>
     <div id="app">
-      {{total_contributors}} pessoas já apoiaram EletroBlocks no CATARSE e
-      faltam {{tempoQueFalta}} dias para a campanha finalizar. {{progress}} d
+      {{progress}}
     </div>
     <script>
-      const sse = new SSE('/api/sse');
-
-      sse.listen('newcity', (data) => {
-        console.log('message', data);
-        getApi();
-      });
-
       new Vue({
         el: "#app",
 
@@ -72,6 +63,5 @@
         },
       });
     </script>
-
   </body>
 </html>
