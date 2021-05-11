@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>imagem</title>
+  <script src="/sse.js"></script>
+  <style>
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="imagem" src="test.png" class="hide" alt="">
+
+  <script>
+    const sse = new SSE('/api/sse');
+    sse.listen('newcity', (data) => {
+      console.log('message', data);
+      var el;
+      el = document.getElementById("imagem");
+      el.classList.toggle("hide");
+      setTimeout(() => {
+        el.classList.toggle("hide");
+      }, 5000);
+
+    });
+  </script>
+</body>
+</html>

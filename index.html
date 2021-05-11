@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <title>ok</title>
+  </head>
+  <body>
+    <div id="app">
+      {{total_contributors}} pessoas já apoiaram EletroBlocks no CATARSE e
+      faltam {{tempoQueFalta}} dias para a campanha finalizar. {{progress}} d
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+
+        data() {
+          return {
+            total_contributors: null,
+            tempoQueFalta: null,
+            progress: null,
+          };
+        },
+        mounted() {
+          this.getApi();
+          setTimeout(() => {
+            this.getApi();
+          }, 60000);
+        },
+        methods: {
+          getApi() {
+            console.log("get api");
+            axios
+              .get(
+                " https://api.catarse.me/project_details?project_id=eq.128212"
+              )
+              .then((response) => {
+                const data = response.data;
+                const [
+                  {
+                    remaining_time: { total: tempoQueFalta },
+                    total_contributors,
+                    progress,
+                  },
+                ] = data;
+                this.total_contributors = total_contributors;
+                this.tempoQueFalta = tempoQueFalta;
+                this.progress = progress;
+                // console.log(
+                //   `${total_contributors} pessoas já apoiaram EletroBlocks no CATARSE e faltam  ${tempoQueFalta} dias para a campanha finalizar.`,
+                //   `${progress} d`
+                // );
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
