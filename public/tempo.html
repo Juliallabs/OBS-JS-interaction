@@ -13,10 +13,20 @@
       crossorigin="anonymous"
     ></script>
     <title>ok</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style type="text/css">
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-weight:bold;
+        font-size:15px;
+        color: red;
+        }
+
+   </style>
   </head>
   <body>
     <div id="app">
-      {{tempoQueFalta}}
+     <p> {{tempoQueFalta}}</p>
     </div>
     <script>
       new Vue({
@@ -31,9 +41,9 @@
         },
         mounted() {
           this.getApi();
-          setTimeout(() => {
+          setInterval(() => {
             this.getApi();
-          }, 60000);
+          }, 900000); // 15 minutos 
         },
         methods: {
           getApi() {
@@ -52,7 +62,7 @@
                   },
                 ] = data;
                 this.total_contributors = total_contributors;
-                this.tempoQueFalta = tempoQueFalta;
+                this.tempoQueFalta = tempoQueFalta ;
                 this.progress = progress;
                 // console.log(
                 //   `${total_contributors} pessoas já apoiaram EletroBlocks no CATARSE e faltam  ${tempoQueFalta} dias para a campanha finalizar.`,

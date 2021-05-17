@@ -81,10 +81,3 @@ app.use('/static', express.static('public'));
     console.log(`Example app listening at http://localhost:${3000}`)
   });
 
-setInterval(() => {
-  if (last_total_contributors != getMessages(total_contributors)){
-    sendSSEMessage(send);
-    last_total_contributors=total_contributors;
-  }
-
-}, 500);

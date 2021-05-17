@@ -15,32 +15,32 @@
     <title>ok</title>
   </head>
   <body>
-
-
     <div id="app">
-      {{tempoQueFalta}}
+      <video v-if="show" width="354" height="354" autoplay="" loop="" muted="">
+        <source src="test.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <!-- <img id="imagem" src="test.mp4" v-if="show" alt="" /> -->
     </div>
-
-    <img id="imagem" src="test.png" class="hide" alt="">
 
     <script>
       new Vue({
         el: "#app",
-        last_total_contributors: null,
         data() {
           return {
+            show: false,
+            last_total_contributors: null,
             total_contributors: null,
             tempoQueFalta: null,
             progress: null,
           };
         },
         mounted() {
-         do{
+          window.app = this;
           this.getApi();
-          setTimeout(() => {
+          setInterval(() => {
             this.getApi();
           }, 6000);
-        }while (true);
         },
         methods: {
           getApi() {
@@ -60,26 +60,15 @@
                 ] = data;
                 this.total_contributors = total_contributors;
                 this.progress = progress;
-                
 
+                if (total_contributors != this.last_total_contributors) {
+                  this.show = true;
+                  this.last_total_contributors = total_contributors;
+                }
 
-                //var last_total_contributors=total_contributors;
-
-
-               // if (last_total_contributors = total_contributors){
-                  var el;
-                  el = document.getElementById("imagem");
-                  el.style.visibility = 'visible';
-                  setTimeout(() => {
-                      el.style.visibility= 'hidden';
-                      console.log("total", total_contributors);
-                  }, 5000);
-                //}
-
-
-
-                
-                
+                setTimeout(() => {
+                  this.show = false;
+                }, 5000);
               });
           },
         },

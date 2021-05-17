@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
-      rel="stylesheet"
-    />
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script
@@ -19,21 +16,12 @@
   </head>
   <body>
     <div id="app">
-      <v-app>
-        <v-main>         
-          <v-progress-linear :value="progress" color="#607d8b" height="25">
-            <template v-slot:default="{ value }">
-              <strong>{{ Math.ceil(value) }}%</strong>
-            </template>
-          </v-progress-linear>
-       
-        </v-main>
-      </v-app>
+      {{progress}}
     </div>
     <script>
       new Vue({
         el: "#app",
-        vuetify: new Vuetify(),
+
         data() {
           return {
             total_contributors: null,
@@ -43,12 +31,9 @@
         },
         mounted() {
           this.getApi();
-            // setInterval(()=>{
-            //  ++ this.progress 
-            // },200);
-          setInterval(() => {
+          setTimeout(() => {
             this.getApi();
-          }, 60000);
+          }, 600);
         },
         methods: {
           getApi() {
@@ -68,8 +53,7 @@
                 ] = data;
                 this.total_contributors = total_contributors;
                 this.tempoQueFalta = tempoQueFalta;
-                // this.progress = progress + this.i ;
-                
+                this.progress = progress;
                 // console.log(
                 //   `${total_contributors} pessoas já apoiaram EletroBlocks no CATARSE e faltam  ${tempoQueFalta} dias para a campanha finalizar.`,
                 //   `${progress} d`

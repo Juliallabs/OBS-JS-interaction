@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
-      rel="stylesheet"
-    />
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script
@@ -15,25 +12,35 @@
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
       crossorigin="anonymous"
     ></script>
+
+    
     <title>ok</title>
+  
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
+  <style type="text/css">
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-weight:bold;
+        font-size:15px;
+        color:whitesmoke;
+        }
+
+   </style>
     <div id="app">
-      <v-app>
-        <v-main>         
-          <v-progress-linear :value="progress" color="#607d8b" height="25">
-            <template v-slot:default="{ value }">
-              <strong>{{ Math.ceil(value) }}%</strong>
-            </template>
-          </v-progress-linear>
-       
-        </v-main>
-      </v-app>
+      <marquee>
+        <p >
+          <span v-for="n in 1000" :key="n">
+        CATARSE.ME/ELETROBLOCKS  &nbsp; 
+      </span>
+      </p>
+      </marquee>
     </div>
     <script>
       new Vue({
         el: "#app",
-        vuetify: new Vuetify(),
+
         data() {
           return {
             total_contributors: null,
@@ -43,10 +50,7 @@
         },
         mounted() {
           this.getApi();
-            // setInterval(()=>{
-            //  ++ this.progress 
-            // },200);
-          setInterval(() => {
+          setTimeout(() => {
             this.getApi();
           }, 60000);
         },
@@ -68,8 +72,7 @@
                 ] = data;
                 this.total_contributors = total_contributors;
                 this.tempoQueFalta = tempoQueFalta;
-                // this.progress = progress + this.i ;
-                
+                this.progress = progress;
                 // console.log(
                 //   `${total_contributors} pessoas já apoiaram EletroBlocks no CATARSE e faltam  ${tempoQueFalta} dias para a campanha finalizar.`,
                 //   `${progress} d`
